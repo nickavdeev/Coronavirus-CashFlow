@@ -1,0 +1,8 @@
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/Rectangles.exe.config
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/Rectangles.exe
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/Rectangles.pdb
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/TestingRoom.dll
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/Rectangles.csprojAssemblyReference.cache
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/Rectangles.csproj.CopyComplete
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/Rectangles.exe
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/Rectangles.pdb

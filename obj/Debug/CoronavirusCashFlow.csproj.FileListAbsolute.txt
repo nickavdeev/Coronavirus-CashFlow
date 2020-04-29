@@ -1,0 +1,16 @@
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/CoronavirusCashFlow.exe.config
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/CoronavirusCashFlow.exe
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/CoronavirusCashFlow.pdb
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/bin/Debug/TestingRoom.dll
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/CoronavirusCashFlow.csprojAssemblyReference.cache
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/CoronavirusCashFlow.csproj.CopyComplete
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/CoronavirusCashFlow.exe
+/Users/nikitaavdeev/Desktop/Rectangles.csproj/obj/Debug/CoronavirusCashFlow.pdb
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/bin/Debug/CoronavirusCashFlow.exe.config
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/bin/Debug/CoronavirusCashFlow.exe
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/bin/Debug/CoronavirusCashFlow.pdb
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/bin/Debug/TestingRoom.dll
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.csprojAssemblyReference.cache
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.csproj.CopyComplete
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.exe
+/Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.pdb
