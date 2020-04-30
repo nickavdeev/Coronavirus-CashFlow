@@ -14,3 +14,9 @@
 /Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.csproj.CopyComplete
 /Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.exe
 /Users/nikitaavdeev/Desktop/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.pdb
+/Users/nikitaavdeev/YandexDisk/Университет/Первый курс/Второй семестр/CoronavirusCashFlow.csproj/bin/Debug/CoronavirusCashFlow.exe.config
+/Users/nikitaavdeev/YandexDisk/Университет/Первый курс/Второй семестр/CoronavirusCashFlow.csproj/bin/Debug/CoronavirusCashFlow.exe
+/Users/nikitaavdeev/YandexDisk/Университет/Первый курс/Второй семестр/CoronavirusCashFlow.csproj/bin/Debug/CoronavirusCashFlow.pdb
+/Users/nikitaavdeev/YandexDisk/Университет/Первый курс/Второй семестр/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.csprojAssemblyReference.cache
+/Users/nikitaavdeev/YandexDisk/Университет/Первый курс/Второй семестр/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.exe
+/Users/nikitaavdeev/YandexDisk/Университет/Первый курс/Второй семестр/CoronavirusCashFlow.csproj/obj/Debug/CoronavirusCashFlow.pdb
