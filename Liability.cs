@@ -11,7 +11,7 @@ namespace CoronavirusCashFlow
     
     public class Liability
     {
-        public readonly string Title;
+        public string Title;
         public readonly double Cost;
         public readonly double Expense;
         public readonly int Hours;
@@ -39,6 +39,10 @@ namespace CoronavirusCashFlow
 
     public class Car : Liability
     {
+        private Car(string title, double cost, double expense, int hours) : base(title, cost, expense, hours)
+        {
+            Title = "Автомобиль: " + title;
+        }
         public static Liability GetCar(string title) => Cars[title];
         private static readonly Dictionary<string, Liability> Cars = new Dictionary<string, Liability>
         {
@@ -46,7 +50,5 @@ namespace CoronavirusCashFlow
             {"Volkswagen Polo", new Car("Volkswagen Polo", 700000, 2000, 18)},
             {"Porsche Cayman", new Car("Porsche Cayman", 5000000, 7000, 20)},
         };
-
-        private Car(string title, double cost, double expense, int hours) : base(title, cost, expense, hours) {}
     }
 }

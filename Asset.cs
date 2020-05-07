@@ -17,7 +17,7 @@ namespace CoronavirusCashFlow
         public readonly double Income;
         public readonly int Hours;
 
-        internal Asset(string title, double cost, double income, int hours)
+        protected Asset(string title, double cost, double income, int hours)
         {
             //AssetType = AssetType.Stock;
             Title = title;
@@ -26,7 +26,7 @@ namespace CoronavirusCashFlow
             Hours = hours;
         }
         
-        internal Asset(string title, double income, int hours)
+        protected Asset(string title, double income, int hours)
         {
             // AssetType = AssetType.Work;
             Title = title;

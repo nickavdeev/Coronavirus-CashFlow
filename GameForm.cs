@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace CoronavirusCashFlow
@@ -10,6 +11,8 @@ namespace CoronavirusCashFlow
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             graphics.FillRectangle(new SolidBrush(Color.FromArgb(0,61,0)), 0, 0, 100, 700);
             graphics.FillRectangle(new SolidBrush(Color.FromArgb(51,105,30)), 100, 0, 300, 700);
             graphics.FillRectangle(new SolidBrush(Color.FromArgb(250,250,250)), 400, 0, 800, 700);
