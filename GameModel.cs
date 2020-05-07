@@ -41,10 +41,10 @@ namespace CoronavirusCashFlow
             switch (type)
             {
                 case PlayerInfoTypes.MainInfo:
-                    return $"Мечта: {player.Dream.Title}\n \n" + "Сбережения: {player.Savings}\n \n" +
-                           $"Денежный поток: {player.CashFlow()}\n \n" + "Доходы: {player.Income()}\n \n" +
-                           $"Расходы: {player.Expenses()}\n \n" + "Активы: {player.Assets()}\n \n" +
-                           $"Пассивы: {player.Liabilities()}\n \n" + "Время: {player.Hours()}";
+                    return $"Мечта: {player.Dream.Title}\n \n" + $"Сбережения: {player.Savings}\n \n" +
+                           $"Денежный поток: {player.CashFlow()}\n \n" + $"Доходы: {player.Income()}\n \n" +
+                           $"Расходы: {player.Expenses()}\n \n" + $"Активы: {player.Assets()}\n \n" +
+                           $"Пассивы: {player.Liabilities()}\n \n" + $"Время: {player.Hours()}";
                 case PlayerInfoTypes.IncomeInfo:
                     return string.Join("\n \n", player.AssetsList.Select(x => $"{x.Title} ({x.Income})"));
                 case PlayerInfoTypes.ExpensesInfo:
