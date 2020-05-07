@@ -6,6 +6,7 @@ namespace CoronavirusCashFlow
     public enum LiabilityType
     {
         SocialNeed,
+        Car
     }
     
     public class Liability
@@ -26,20 +27,26 @@ namespace CoronavirusCashFlow
 
     public class SocialNeed : Liability
     {
-        public static readonly List<string> Needs = new List<string>
-        {
-            "Своя квартира",
-            "Красная Ferarri"
-        };
-
         private SocialNeed(string title, double cost, double expense, int hours) : base(title, cost, expense, hours) {}
 
         public static Liability GetSocialNeed(string title) => SocialNeeds[title];
         private static readonly Dictionary<string, Liability> SocialNeeds = new Dictionary<string, Liability>
         {
             // Социальные потребности
-            {Needs[0], new SocialNeed(Needs[0], 2500000, new Random().Next(5000, 7000), 0)},
-            {Needs[1], new SocialNeed(Needs[1], 8000000, new Random().Next(5000, 7000), 10)},
+            {"Своя квартира", new SocialNeed("Своя квартира", 2500000, new Random().Next(5, 7) * 1000, 0)},
         };
+    }
+
+    public class Car : Liability
+    {
+        public static Liability GetCar(string title) => Cars[title];
+        private static readonly Dictionary<string, Liability> Cars = new Dictionary<string, Liability>
+        {
+            // Автомобили
+            {"Volkswagen Polo", new Car("Volkswagen Polo", 700000, 2000, 18)},
+            {"Porsche Cayman", new Car("Porsche Cayman", 5000000, 7000, 20)},
+        };
+
+        private Car(string title, double cost, double expense, int hours) : base(title, cost, expense, hours) {}
     }
 }
