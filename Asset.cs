@@ -38,11 +38,6 @@ namespace CoronavirusCashFlow
 
     public class Stock : Asset
     {
-        public static readonly List<string> Companies = new List<string>
-        {
-            "Gilead Sciences", 
-            "Netflix"
-        };
         private Stock(string title, double cost, double income, int hours) : base(title, cost, income, hours)
         {
             Title = "Акции " + title;
@@ -52,19 +47,14 @@ namespace CoronavirusCashFlow
         private static readonly Dictionary<string, Asset> Stocks = new Dictionary<string, Asset>()
         {
             // Акции компаний
-            {Companies[0], new Stock(Companies[0], new Random().Next(200, 500), new Random().Next(10, 40), 0)},
-            {Companies[1], new Stock(Companies[1], new Random().Next(200, 500), new Random().Next(10, 40), 0)},
+            {"Gilead Sciences", new Stock("Gilead Sciences", new Random().Next(200, 500), new Random().Next(10, 40), 0)},
+            {"Netflix", new Stock("Netflix", new Random().Next(200, 500), new Random().Next(10, 40), 0)},
+            {"Zoom", new Stock("Zoom", new Random().Next(100, 200), new Random().Next(0, 20), 0)},
         };
     }
     
     public class Work : Asset
     {
-        public static readonly List<string> Professions = new List<string>
-        {
-            "Программист C#", 
-            "Журналист"
-        };
-        
         private Work(string title, double income, int hours) : base(title, income, hours)
         {
             Title = "Работа: " + title;
@@ -74,8 +64,8 @@ namespace CoronavirusCashFlow
         private static readonly Dictionary<string, Asset> Works = new Dictionary<string, Asset>
         {
             // Варианты работы
-            {Professions[0], new Work(Professions[0], new Random().Next(20000, 30000), 120)},
-            {Professions[1], new Work(Professions[1], new Random().Next(20000, 30000), 100)},
+            {"Программист", new Work("Программист", new Random().Next(20, 30) * 1000, 120)},
+            {"Журналист", new Work("Журналист", new Random().Next(20, 30) * 1000, 100)},
         };
     }
 }

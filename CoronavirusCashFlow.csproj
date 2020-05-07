@@ -50,11 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asset.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="GameModel.cs" />
     <Compile Include="Liability.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Property.cs" />
+    <Compile Include="PlayingField.cs" />
+    <Compile Include="GameForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
