@@ -13,7 +13,7 @@ namespace CoronavirusCashFlow
     {
         // private readonly AssetType AssetType;
         public string Title;
-        public readonly double Cost;
+        public double Cost;
         public readonly double Income;
         public readonly int Hours;
 
