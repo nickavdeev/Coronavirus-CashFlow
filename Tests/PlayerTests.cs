@@ -43,7 +43,6 @@ namespace CoronavirusCashFlow.Tests
             
             player.AddAsset(Stock.GetStock("Netflix"));
             player.AddLiability(Car.GetCar("Volkswagen Polo"));
-            
             player.RemoveAsset(Stock.GetStock("Netflix"));
             player.RemoveLiability(Car.GetCar("Volkswagen Polo"));
 
