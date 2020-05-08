@@ -54,17 +54,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asset.cs" />
-    <Compile Include="GameModel.cs" />
-    <Compile Include="GameModelTests.cs" />
-    <Compile Include="Liability.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayingField.cs" />
+    <Compile Include="GameModel\Asset.cs" />
+    <Compile Include="GameModel\GameModel.cs" />
+    <Compile Include="GameModel\GameModelTests.cs" />
+    <Compile Include="GameModel\Liability.cs" />
+    <Compile Include="GameModel\Player.cs" />
     <Compile Include="GameForm.cs" />
+    <Compile Include="GameModel\PlayingField.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="Configs\App.config" />
+    <None Include="Configs\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
