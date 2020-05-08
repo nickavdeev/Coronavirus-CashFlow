@@ -56,11 +56,13 @@
   <ItemGroup>
     <Compile Include="GameModel\Asset.cs" />
     <Compile Include="GameModel\GameModel.cs" />
-    <Compile Include="GameModel\GameModelTests.cs" />
     <Compile Include="GameModel\Liability.cs" />
     <Compile Include="GameModel\Player.cs" />
     <Compile Include="GameForm.cs" />
     <Compile Include="GameModel\PlayingField.cs" />
+    <Compile Include="Tests\AssetsAndLiabilityTests.cs" />
+    <Compile Include="Tests\GameModelTests.cs" />
+    <Compile Include="Tests\PlayerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configs\App.config" />
