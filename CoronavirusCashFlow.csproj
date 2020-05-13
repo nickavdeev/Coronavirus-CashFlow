@@ -54,15 +54,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameModel\Asset.cs" />
-    <Compile Include="GameModel\GameModel.cs" />
-    <Compile Include="GameModel\Liability.cs" />
-    <Compile Include="GameModel\Player.cs" />
-    <Compile Include="GameForm.cs" />
-    <Compile Include="GameModel\PlayingField.cs" />
+    <Compile Include="Controller\Buttons.cs" />
+    <Compile Include="Model\Assets\Asset.cs" />
+    <Compile Include="Model\Assets\Stock.cs" />
+    <Compile Include="Model\Assets\Work.cs" />
+    <Compile Include="Model\Constants.cs" />
+    <Compile Include="Model\Enums\ColorType.cs" />
+    <Compile Include="Model\Enums\PlayerInfoType.cs" />
+    <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Model\Liabilities\Car.cs" />
+    <Compile Include="Model\Liabilities\Debt.cs" />
+    <Compile Include="Model\Liabilities\Liability.cs" />
+    <Compile Include="Model\Liabilities\SocialNeed.cs" />
+    <Compile Include="Model\Liabilities\Tax.cs" />
+    <Compile Include="Model\Players\Mike.cs" />
+    <Compile Include="Model\Players\Player.cs" />
+    <Compile Include="Model\Tiles\Advice.cs" />
+    <Compile Include="Model\Tiles\Dreams.cs" />
+    <Compile Include="Model\Tiles\Map.cs" />
+    <Compile Include="Model\Tiles\LifeSituations.cs" />
+    <Compile Include="Model\Tiles\News.cs" />
+    <Compile Include="Model\Tiles\StockSituations.cs" />
+    <Compile Include="Model\Tiles\Tile.cs" />
     <Compile Include="Tests\AssetsAndLiabilityTests.cs" />
     <Compile Include="Tests\GameModelTests.cs" />
     <Compile Include="Tests\PlayerTests.cs" />
+    <Compile Include="View\Colors.cs" />
+    <Compile Include="View\GameForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configs\App.config" />
