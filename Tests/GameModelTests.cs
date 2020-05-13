@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using CoronavirusCashFlow.Model;
+using CoronavirusCashFlow.Model.Assets;
+using CoronavirusCashFlow.Model.Liabilities;
+using CoronavirusCashFlow.Model.Players;
 using NUnit.Framework;
 
 namespace CoronavirusCashFlow.Tests
@@ -16,13 +20,7 @@ namespace CoronavirusCashFlow.Tests
         [Test]
         public void ChangeStockCostAfterMove()
         {
-            var player = new Player(
-                "Михаил", 
-                "Описание", 
-                Car.GetCar("Porsche Cayman"), 
-                100000, 
-                new List<Asset> {Stock.GetStock("Netflix")}, 
-                new List<Liability>());
+            var player = new Mike();
             var costBeforeMove = player.AssetsList[0].Cost;
             GameModel.GetMove();
             var costAfterMove = player.AssetsList[0].Cost;

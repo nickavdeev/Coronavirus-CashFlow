@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using CoronavirusCashFlow.Model;
+using CoronavirusCashFlow.Model.Assets;
+using CoronavirusCashFlow.Model.Liabilities;
 using NUnit.Framework;
 
 namespace CoronavirusCashFlow.Tests
