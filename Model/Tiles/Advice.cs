@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
+using CoronavirusCashFlow.Constants;
 
 namespace CoronavirusCashFlow.Model.Tiles
 {
@@ -7,7 +8,7 @@ namespace CoronavirusCashFlow.Model.Tiles
     {
         public Advice(string description, List<Button> buttons) : base(description, buttons)
         {
-            Title = "Совет";
+            Title = TileLabel.AdviceLabel;
         }
     }
 }

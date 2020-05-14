@@ -5,10 +5,7 @@ namespace CoronavirusCashFlow.Model.Assets
 {
     public class Stock : Asset
     {
-        private Stock(string title, double cost, double income, int hours) : base(title, cost, income, hours)
-        {
-            Title = "Акции " + title;
-        }
+        private Stock(string title, double cost, double income, int hours) : base(title, cost, income, hours) { }
         
         public static Asset GetStock(string title) => Stocks[title];
         internal static readonly Dictionary<string, Asset> Stocks = new Dictionary<string, Asset>()

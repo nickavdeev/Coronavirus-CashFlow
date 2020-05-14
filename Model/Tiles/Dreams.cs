@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
+using CoronavirusCashFlow.Constants;
 
 namespace CoronavirusCashFlow.Model.Tiles
 {
@@ -7,7 +8,9 @@ namespace CoronavirusCashFlow.Model.Tiles
     {
         public Dream(string description, List<Button> buttons) : base(description, buttons)
         {
-            Title = "Исполните мечту!";
+            Title = TileLabel.DreamLabel;
+            Description = description 
+                          + $"\n \nМечта: {GameModel.Player.Dream.Title}.\n \nЦена: {GameModel.Player.Dream.Cost}";
         }
     }
 }
