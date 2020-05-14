@@ -5,10 +5,9 @@ namespace CoronavirusCashFlow.Model.Liabilities
     public class Car : Liability
     {
         public static readonly Liability TransportTax = Tax.GetTax("Транспортный налог");
-        private Car(string title, double cost, double expense, int hours) : base(title, cost, expense, hours)
-        {
-            Title = "Автомобиль: " + title;
-        }
+        
+        private Car(string title, double cost, double expense, int hours) : base(title, cost, expense, hours) { }
+        
         public static Liability GetCar(string title) => Cars[title];
         private static readonly Dictionary<string, Liability> Cars = new Dictionary<string, Liability>
         {

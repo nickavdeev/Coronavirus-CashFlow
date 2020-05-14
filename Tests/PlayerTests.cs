@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using CoronavirusCashFlow.Model;
 using CoronavirusCashFlow.Model.Assets;
+using CoronavirusCashFlow.Model.Enums;
 using CoronavirusCashFlow.Model.Liabilities;
 using CoronavirusCashFlow.Model.Players;
 using NUnit.Framework;
@@ -12,29 +11,27 @@ namespace CoronavirusCashFlow.Tests
         [Test]
         public void CreatePlayer()
         {
-            var player = new Mike();
+            var player = new Player(PlayerName.Mike);
             Assert.AreEqual("Михаил", player.Name);
         }
 
         [Test]
-        public void CreatePlayerWithAssetsLiabilitiesAndDream()
+        public void GetPlayerMike()
         {
-            var player = new Mike();
-            player.AddAsset(Stock.GetStock("Netflix"));
-            player.AddLiability(Car.GetCar("Volkswagen Polo"));
-            
-            Assert.AreEqual("Автомобиль: Porsche Cayman", player.Dream.Title);
-            Assert.AreEqual("Акции Netflix", player.AssetsList[0].Title);
-            Assert.AreEqual("Автомобиль: Volkswagen Polo", player.LiabilitiesList[0].Title);
+            var player = new Player(PlayerName.Mike);
+            Assert.AreEqual("Porsche Cayman", player.Dream.Title);
+            Assert.AreEqual("Работа: Программист", player.AssetsList[0].Title);
+            Assert.AreEqual("Своя квартира", player.LiabilitiesList[0].Title);
+            Assert.AreEqual("Связь и интернет", player.LiabilitiesList[1].Title);
         }
         
         [Test]
         public void RemoveAssetsAndLiabilities()
         {
-            var player = new Mike();
-            player.AddAsset(Stock.GetStock("Netflix"));
+            var player = new Player();
+            player.AddAsset(Stock.GetStock("Metflix"));
             player.AddLiability(Car.GetCar("Volkswagen Polo"));
-            player.RemoveAsset(Stock.GetStock("Netflix"));
+            player.RemoveAsset(Stock.GetStock("Metflix"));
             player.RemoveLiability(Car.GetCar("Volkswagen Polo"));
 
             Assert.AreEqual(0, player.AssetsList.Count);
@@ -44,8 +41,8 @@ namespace CoronavirusCashFlow.Tests
         [Test]
         public void RemoveNonexistentItem()
         {
-            var player = new Mike();
-            player.RemoveAsset(Stock.GetStock("Netflix"));
+            var player = new Player();
+            player.RemoveAsset(Stock.GetStock("Metflix"));
 
             Assert.AreEqual(0, player.AssetsList.Count);
         }
@@ -53,7 +50,7 @@ namespace CoronavirusCashFlow.Tests
         [Test]
         public void AddTaxWithCar()
         {
-            var player = new Mike();
+            var player = new Player(PlayerName.Mike);
             player.AddLiability(Car.GetCar("Volkswagen Polo"));
 
             Assert.AreEqual(true, player.LiabilitiesList.Contains(Tax.GetTax("Транспортный налог")));

@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using CoronavirusCashFlow.Controller;
+using CoronavirusCashFlow.Constants;
+using CoronavirusCashFlow.Controller.Menu;
+using CoronavirusCashFlow.Controller.PlayingFiled;
+using CoronavirusCashFlow.Controller.StockExchange;
 using CoronavirusCashFlow.Model;
+using CoronavirusCashFlow.Model.Assets;
 using CoronavirusCashFlow.Model.Enums;
 using CoronavirusCashFlow.Model.Liabilities;
 
@@ -12,260 +17,51 @@ namespace CoronavirusCashFlow.View
 {
     internal class GameForm : Form
     {
-        private Size _formSize = new Size(1200, 700);
+        private static readonly Size FormSize = new Size(1200, 700);
         
-        // Отрисовка элементов игры
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            graphics.FillRectangle(new SolidBrush(Color.FromArgb(0,61,0)), 0, 0, 100, _formSize.Height);
-            graphics.FillRectangle(new SolidBrush(Color.FromArgb(51,105,30)), 100, 0, 300, _formSize.Height);
-            graphics.FillRectangle(new SolidBrush(Color.FromArgb(250,250,250)), 400, 0, 800, _formSize.Height);
+            graphics.FillRectangle(new SolidBrush(Colors.DarkGreen), 0, 0, 100, FormSize.Height);
+            graphics.FillRectangle(new SolidBrush(Colors.LightGreen), 100, 0, 300, FormSize.Height);
+            graphics.FillRectangle(new SolidBrush(Colors.White), 400, 0, 800, FormSize.Height);
         }
-
+        
         private GameForm()
         {
-            // Основные цвета игры
-            var darkGreen = Color.FromArgb(0, 61, 0);
-            var mediumGreen = Color.FromArgb(25, 80, 15);
-            var green = Color.FromArgb(51, 105, 30);
-
             // Главное меню
-            Button GetMenuButton(string buttonText, Control previousButton)
-            {
-                return new Button
-                {
-                    Location = new Point(0, previousButton.Bottom),
-                    Size = new Size(100, 100),
-                    Text = buttonText,
-                    Font = new Font("Arial", 14, FontStyle.Bold),
-                    BackColor = Color.Transparent,
-                    ForeColor = Color.Snow,
-                    Cursor = Cursors.Hand,
-                    FlatStyle = FlatStyle.Flat,
-                    FlatAppearance = { BorderColor = darkGreen, MouseOverBackColor = mediumGreen, BorderSize = 0, MouseDownBackColor = darkGreen}
-                };
-            }
-            var mainInfoButton = new Button {
-                Location = new Point(0, 0),
-                Size = new Size(100, 100),
-                Text = "Главное",
-                Font = new Font("Arial", 14, FontStyle.Bold),
-                BackColor = green,
-                ForeColor = Color.Snow,
-                Cursor = Cursors.Hand,
-                FlatStyle = FlatStyle.Flat,
-                FlatAppearance = { BorderColor = green, MouseOverBackColor = mediumGreen, BorderSize = 0, MouseDownBackColor = darkGreen}
-            };
-            var incomeButton = GetMenuButton("Доходы", mainInfoButton);
-            var expensesButton = GetMenuButton("Расходы", incomeButton);
-            var assetsButton = GetMenuButton("Активы", expensesButton);
-            var liabilitiesButton = GetMenuButton("Пассивы", assetsButton);
-            var timeButton = GetMenuButton("Время", liabilitiesButton);
+            Controls.Add(MenuButtons.MainInfoButton);
+            Controls.Add(MenuButtons.IncomeButton);
+            Controls.Add(MenuButtons.ExpensesButton);
+            Controls.Add(MenuButtons.AssetsButton);
+            Controls.Add(MenuButtons.LiabilitiesButton);
+            Controls.Add(MenuButtons.TimeButton);
             
-            // Информационные тексты
-            // Главная
-            var mainInfoTextLabel = new Label {
-                Text = GameModel.Player.Name,
-                Location = new Point(118, 23),
-                Size = new Size(250, 50),
-                AutoSize = false,
-                Font = new Font("Arial", 26, FontStyle.Bold),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            var mainInfoText = new Label {
-                Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.MainInfo),
-                Location = new Point(120, mainInfoTextLabel.Bottom),
-                Size = new Size(250, 450),
-                AutoSize = false,
-                Font = new Font("Arial", 14, FontStyle.Regular),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            // Доходы
-            var incomeTextLabel = new Label {
-                Text = "Доходы",
-                Location = new Point(120, 25),
-                Size = new Size(250, 45),
-                AutoSize = false,
-                Font = new Font("Arial", 20, FontStyle.Bold),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            var incomeText = new Label {
-                Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.AssetsInfo),
-                Location = new Point(120, incomeTextLabel.Bottom),
-                Size = new Size(250, 450),
-                AutoSize = false,
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            // Расходы
-            var expensesTextLabel = new Label {
-                Text = "Расходы",
-                Location = new Point(120, 25),
-                Size = new Size(250, 45),
-                AutoSize = false,
-                Font = new Font("Arial", 20, FontStyle.Bold),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            var expensesText = new Label {
-                Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.AssetsInfo),
-                Location = new Point(120, expensesTextLabel.Bottom),
-                Size = new Size(250, 450),
-                AutoSize = false,
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            // Активы
-            var assetsTextLabel = new Label {
-                Text = "Активы",
-                Location = new Point(120, 25),
-                Size = new Size(250, 45),
-                AutoSize = false,
-                Font = new Font("Arial", 20, FontStyle.Bold),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            var assetsText = new Label {
-                Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.AssetsInfo),
-                Location = new Point(120, assetsTextLabel.Bottom),
-                Size = new Size(250, 450),
-                AutoSize = false,
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            // Пассивы
-            var liabilitiesTextLabel = new Label {
-                Text = "Пассивы",
-                Location = new Point(120, 25),
-                Size = new Size(250, 45),
-                AutoSize = false,
-                Font = new Font("Arial", 20, FontStyle.Bold),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            var liabilitiesText = new Label {
-                Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.LiabilitiesInfo),
-                Location = new Point(120, liabilitiesTextLabel.Bottom),
-                Size = new Size(250, 450),
-                AutoSize = false,
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            // Время
-            var timeTextLabel = new Label {
-                Text = "Время",
-                Location = new Point(120, 25),
-                Size = new Size(250, 45),
-                AutoSize = false,
-                Font = new Font("Arial", 20, FontStyle.Bold),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-            var timeText = new Label {
-                Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.LiabilitiesInfo),
-                Location = new Point(120, timeTextLabel.Bottom),
-                Size = new Size(250, 450),
-                AutoSize = false,
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                BackColor = Color.Transparent,
-                ForeColor = Color.Snow,
-            }; 
-
-            // Тексты игрового поля
-            var mainText = new Label {
-                Text = "Для начала игры нажмите кнопку",
-                Font = new Font("Arial", 14, FontStyle.Regular),
-                Location = new Point(550, 100),
-                Size = new Size(500, 40),
-                AutoSize = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = Color.Black,
-                ForeColor = Color.Snow,
-            };
-            var cellText = new Label {
-                Font = new Font("Arial", 16, FontStyle.Regular),
-                Location = new Point(550, 150),
-                Size = new Size(500, 40),
-                AutoSize = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = green,
-                ForeColor = Color.Snow,
-            };
-            var descriptionCellText = new Label {
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                Location = new Point(550, cellText.Bottom),
-                Size = new Size(500, 150),
-                AutoSize = false,
-                MaximumSize = new Size(500, 0),
-                TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = green,
-                ForeColor = Color.Snow,
-                Padding = new Padding(20, 20, 40, 20),
-            };
-            var startButton = new Button {
-                Location = new Point(700, 400),
-                Size = new Size(200, 40),
-                Text = "Начать игру!",
-                Font = new Font("Arial", 14, FontStyle.Bold),
-                BackColor = Color.Black,
-                ForeColor = Color.Snow,
-                Cursor = Cursors.Hand,
-                FlatStyle = FlatStyle.Flat,
-                FlatAppearance = { MouseOverBackColor = Color.Black, BorderSize = 0, MouseDownBackColor = darkGreen}
-            };
-            var stockExchangeButton = new Button {
-                Location = new Point(755, 490),
-                Size = new Size(100, 40),
-                Text = "Биржа",
-                Font = new Font("Arial", 14, FontStyle.Bold),
-                BackColor = darkGreen,
-                ForeColor = Color.Snow,
-                Cursor = Cursors.Hand,
-                FlatStyle = FlatStyle.Flat,
-                FlatAppearance = { MouseOverBackColor = Color.Black, BorderSize = 0, MouseDownBackColor = darkGreen}
-            };
-            
-            Controls.Add(mainInfoButton);
-            Controls.Add(incomeButton);
-            Controls.Add(expensesButton);
-            Controls.Add(assetsButton);
-            Controls.Add(liabilitiesButton);
-            Controls.Add(timeButton);
-            
-            Controls.Add(mainInfoTextLabel);
-            Controls.Add(mainInfoText);
-            
-            Controls.Add(mainText);
-            Controls.Add(startButton);
-            Controls.Add(stockExchangeButton);
+            // Стартовое игровое поле
+            Controls.Add(MainInfo.MainTitle);
+            Controls.Add(MainInfo.MainInfoText);
+            Controls.Add(PlayingFieldLabels.MainText);
+            Controls.Add(Buttons.StartButton);
 
             void UpdateMenuInfo(Button checkedButton = null)
             {
-                mainInfoText.Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.MainInfo);
-                incomeText.Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.IncomeInfo);
-                expensesText.Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.ExpensesInfo);
-                assetsText.Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.AssetsInfo);
-                liabilitiesText.Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.LiabilitiesInfo);
-                timeText.Text = GameModel.GetPlayerInfo(GameModel.Player, PlayerInfoType.TimeInfo);
+                MainInfo.MainInfoText.Text = GameModel.Player.GetPlayerInfo(GameModel.Player, PlayerInfoType.MainInfo);
+                PlayerInfo.IncomeInfo.Text = GameModel.Player.GetPlayerInfo(GameModel.Player, PlayerInfoType.IncomeInfo);
+                PlayerInfo.ExpenseInfo.Text = GameModel.Player.GetPlayerInfo(GameModel.Player, PlayerInfoType.ExpensesInfo);
+                PlayerInfo.AssetsInfo.Text = GameModel.Player.GetPlayerInfo(GameModel.Player, PlayerInfoType.AssetsInfo);
+                PlayerInfo.LiabilitiesInfo.Text = GameModel.Player.GetPlayerInfo(GameModel.Player, PlayerInfoType.LiabilitiesInfo);
+                PlayerInfo.TimeInfo.Text = GameModel.Player.GetPlayerInfo(GameModel.Player, PlayerInfoType.TimeInfo);
                 
                 var menuButtons = new Dictionary<Button, (Label, Label)>
                 {
-                    {mainInfoButton, (mainInfoTextLabel, mainInfoText)},
-                    {incomeButton, (incomeTextLabel, incomeText)},
-                    {expensesButton, (expensesTextLabel, expensesText)},
-                    {assetsButton, (assetsTextLabel, assetsText)},
-                    {liabilitiesButton, (liabilitiesTextLabel, liabilitiesText)},
-                    {timeButton, (timeTextLabel, timeText)}
+                    {MenuButtons.MainInfoButton, (MainInfo.MainTitle, MainInfo.MainInfoText)},
+                    {MenuButtons.IncomeButton, (PlayerInfo.IncomeTitle, PlayerInfo.IncomeInfo)},
+                    {MenuButtons.ExpensesButton, (PlayerInfo.ExpenseTitle, PlayerInfo.ExpenseInfo)},
+                    {MenuButtons.AssetsButton, (PlayerInfo.AssetsTitle, PlayerInfo.AssetsInfo)},
+                    {MenuButtons.LiabilitiesButton, (PlayerInfo.LiabilitiesTitle, PlayerInfo.LiabilitiesInfo)},
+                    {MenuButtons.TimeButton, (PlayerInfo.TimeTitle, PlayerInfo.TimeInfo)}
                 };
 
                 if (checkedButton == null) return;
@@ -273,7 +69,7 @@ namespace CoronavirusCashFlow.View
                 {
                     if (button == checkedButton)
                     {
-                        button.BackColor = green;
+                        button.BackColor = Colors.LightGreen;
                         Controls.Add(menuButtons[button].Item1);
                         Controls.Add(menuButtons[button].Item2);
                     }
@@ -285,27 +81,6 @@ namespace CoronavirusCashFlow.View
                     }
                 }
             }
-
-            mainInfoButton.Click += (sender, args) => UpdateMenuInfo(mainInfoButton);
-            incomeButton.Click += (sender, args) => UpdateMenuInfo(incomeButton);
-            expensesButton.Click += (sender, args) => UpdateMenuInfo(expensesButton);
-            assetsButton.Click += (sender, args) => UpdateMenuInfo(assetsButton);
-            liabilitiesButton.Click += (sender, args) => UpdateMenuInfo(liabilitiesButton);
-            timeButton.Click += (sender, args) => UpdateMenuInfo(timeButton);
-
-            startButton.Click += (sender, args) =>
-            {
-                Controls.Remove(startButton);
-                Controls.Add(cellText);
-                Controls.Add(descriptionCellText);
-                
-                GameModel.GetMove();
-                mainText.Text = $"Выпало {GameModel.Cube}, вы на клетке {GameModel.Player.CurrentPosition}: ";
-                cellText.Text = $"{GameModel.CurrentTile.Title}";
-                descriptionCellText.Text = $"{GameModel.CurrentTile.Description}";
-                foreach (var button in GameModel.CurrentTile.Buttons) Controls.Add(button);
-                UpdateMenuInfo();
-            };
             
             void RemoveButtons()
             {
@@ -314,96 +89,174 @@ namespace CoronavirusCashFlow.View
  
             void ChangeView()
             {
-                mainText.Text = $"Выпало {GameModel.Cube}, вы на клетке {GameModel.Player.CurrentPosition}: ";
-                cellText.Text = $"{GameModel.CurrentTile.Title}";
-                descriptionCellText.Text = $"{GameModel.CurrentTile.Description}";
+                PlayingFieldLabels.MainText.Text = $"Выпало {GameModel.Cube}, вы на клетке {GameModel.Player.CurrentPosition}: ";
+                PlayingFieldLabels.CellText.Text = $"{GameModel.CurrentTile.Title}";
+                PlayingFieldLabels.DescriptionCellText.Text = $"{GameModel.CurrentTile.Description}";
                 foreach (var button in GameModel.CurrentTile.Buttons) Controls.Add(button);
+                
+                Metflix.StockCost.Text = (Stock.GetStock("Metflix").Cost).ToString(CultureInfo.InvariantCulture);
+                Zoom.StockCost.Text = (Stock.GetStock("Zoom").Cost).ToString(CultureInfo.InvariantCulture);
+                
                 UpdateMenuInfo();
             }
             
-            Buttons.OkButton.Click += (sender, args) =>
-            {
-                RemoveButtons();
+            Buttons.StartButton.Click += (sender, args) => {
+                Controls.Remove(Buttons.StartButton);
+                Controls.Add(PlayingFieldLabels.CellText);
+                Controls.Add(PlayingFieldLabels.DescriptionCellText);
+                Controls.Add(StockExchangeButtons.OpenStockExchange);
+                
                 GameModel.GetMove();
-                ChangeView();
-            };
-            Buttons.OkButtonWithConsequences.Click += (sender, args) =>
-            {
-                RemoveButtons();
-                GameModel.GetMove();
-                ChangeView();
-            };
-            Buttons.OkButtonWithStockConsequences.Click += (sender, args) =>
-            {
-                RemoveButtons();
-                GameModel.GetMove();
-                ChangeView();
-            };
-            
-            Buttons.OkButtonNewsGoodReport.Click += (sender, args) =>
-            {
-                var stock = GameModel.CurrentTile.StockList.Keys.ToArray()[0];
-                RemoveButtons();
-                descriptionCellText.Text = 
-                    $"Отчёт хорош! {stock.Title} прибавляют в цене!";
-                Controls.Add(Buttons.OkButton);
+                PlayingFieldLabels.MainText.Text = $"Выпало {GameModel.Cube}, вы на клетке {GameModel.Player.CurrentPosition}: ";
+                PlayingFieldLabels.CellText.Text = $"{GameModel.CurrentTile.Title}";
+                PlayingFieldLabels.DescriptionCellText.Text = $"{GameModel.CurrentTile.Description}";
+                foreach (var button in GameModel.CurrentTile.Buttons) Controls.Add(button);
                 UpdateMenuInfo();
             };
-            Buttons.OkButtonNewsBadReport.Click += (sender, args) =>
-            {
-                var stock = GameModel.CurrentTile.StockList.Keys.ToArray()[0];
+
+            // Главное меню
+            MenuButtons.MainInfoButton.Click += (sender, args) => UpdateMenuInfo(MenuButtons.MainInfoButton);
+            MenuButtons.IncomeButton.Click += (sender, args) => UpdateMenuInfo(MenuButtons.IncomeButton);
+            MenuButtons.ExpensesButton.Click += (sender, args) => UpdateMenuInfo(MenuButtons.ExpensesButton);
+            MenuButtons.AssetsButton.Click += (sender, args) => UpdateMenuInfo(MenuButtons.AssetsButton);
+            MenuButtons.LiabilitiesButton.Click += (sender, args) => UpdateMenuInfo(MenuButtons.LiabilitiesButton);
+            MenuButtons.TimeButton.Click += (sender, args) => UpdateMenuInfo(MenuButtons.TimeButton);
+
+            Buttons.ChangeViewButton.Click += (sender, args) => ChangeView();
+            Buttons.OkButton.Click += (sender, args) => {
                 RemoveButtons();
-                descriptionCellText.Text = 
-                    $"Отчёт внезапный отстой! {stock.Title} Падают!!";
-                Controls.Add(Buttons.OkButton);
+                GameModel.GetMove();
+                ChangeView();
+            };
+            Buttons.OkButtonNewsGoodReport.Click += (sender, args) => {
+                var stock = GameModel.CurrentTile.StockList.Keys.ToArray()[0];
+                PlayingFieldLabels.DescriptionCellText.Text = StockResult.GetGoodReport(stock);
+                RemoveButtons();
+                GameModel.GetMove();
+                Controls.Add(Buttons.ChangeViewButton);
+                UpdateMenuInfo();
+            };
+            Buttons.OkButtonNewsBadReport.Click += (sender, args) => {
+                var stock = GameModel.CurrentTile.StockList.Keys.ToArray()[0];
+                PlayingFieldLabels.DescriptionCellText.Text = StockResult.GetGoodReport(stock);
+                RemoveButtons();
+                Controls.Add(Buttons.ChangeViewButton);
                 UpdateMenuInfo();
             };
             
-            Buttons.NextMoveButton.Click += (sender, args) =>
-            {
+            Buttons.NextMoveButton.Click += (sender, args) => {
                 Controls.Remove(Buttons.NextMoveButton);
                 Controls.Remove(Buttons.AcceptDebtButton);
                 RemoveButtons();
                 GameModel.GetMove();
                 ChangeView();
             };
-            Buttons.BuyDreamButton.Click += (sender, args) =>
-            {
-                GameModel.Player.AddLiability(GameModel.Player.Dream, GameModel.Player.Dream.Cost);
+            Buttons.BuyDreamButton.Click += (sender, args) => {
+                GameModel.Player.AddLiability(GameModel.Player.Dream);
                 RemoveButtons();
                 GameModel.GetMove();
                 ChangeView();
             };
-            Buttons.GetDebtButton.Click += (sender, args) =>
-            {
+            Buttons.GetDebtButton.Click += (sender, args) => {
                 RemoveButtons();
-                cellText.Text = "Кредит у банка";
-                if (GameModel.Player.CashFlow() < 10000) descriptionCellText.Text = "Невозможно взять кредит.";
+                PlayingFieldLabels.CellText.Text = "Кредит у банка";
+                if (GameModel.Player.CashFlow() < 20000) 
+                    PlayingFieldLabels.DescriptionCellText.Text = DebtResult.CreditDenial;
                 else
                 {
-                    var debt = Debt.GetDebt("Кредит");
-                    descriptionCellText.Text = $"Банк предлагает кредит на {debt.Cost} с ежемесячным платежём " +
-                                               $"{debt.Expense} на { (int)(debt.Cost / debt.Expense) } месяцев.";
+                    PlayingFieldLabels.DescriptionCellText.Text = DebtResult.BankOffer(Debt.GetDebt("Кредит"));
                     Controls.Add(Buttons.AcceptDebtButton);
                 }
                 Controls.Add(Buttons.NextMoveButton);
             };
-            Buttons.AcceptDebtButton.Click += (sender, args) =>
-            {
+            Buttons.AcceptDebtButton.Click += (sender, args) => {
                 RemoveButtons();
                 var debt = Debt.GetDebt("Кредит");
                 Controls.Remove(Buttons.NextMoveButton);
                 Controls.Remove(Buttons.AcceptDebtButton);
-                
                 GameModel.Player.AddLiability(debt);
                 GameModel.Player.Savings += debt.Cost;
                 GameModel.Player.DebtMonths = (int)(debt.Cost / debt.Expense);
                 GameModel.GetMove();
                 ChangeView();
             };
-            stockExchangeButton.Click += (sender, args) =>
-            {
+
+            StockExchangeButtons.OpenStockExchange.Click += (sender, args) => {
+                RemoveButtons();
+                PlayingFieldLabels.CellText.Text = "Столичная биржа";
+                    
+                Controls.Remove(StockExchangeButtons.OpenStockExchange);
+                Controls.Add(StockExchangeButtons.CloseStockExchange);
+                Controls.Remove(PlayingFieldLabels.DescriptionCellText);
                 
+                Controls.Add(StockExchangeLabels.CompanyName);
+                Controls.Add(StockExchangeLabels.StockCostName);
+                Controls.Add(StockExchangeLabels.StocksCount);
+                Controls.Add(StockExchangeLabels.BuyLabel);
+                Controls.Add(StockExchangeLabels.SellLabel);
+                
+                Controls.Add(Metflix.Label);
+                Controls.Add(Metflix.StockCost);
+                Controls.Add(Metflix.StocksCount);
+                Controls.Add(Metflix.BuyButton);
+                Controls.Add(Metflix.SellButton);
+                
+                Controls.Add(Zoom.Label);
+                Controls.Add(Zoom.StockCost);
+                Controls.Add(Zoom.StocksCount);
+                Controls.Add(Zoom.BuyButton);
+                Controls.Add(Zoom.SellButton);
+            };
+            StockExchangeButtons.CloseStockExchange.Click += (sender, args) => {
+                Controls.Remove(StockExchangeButtons.CloseStockExchange);
+                
+                Controls.Remove(StockExchangeLabels.CompanyName);
+                Controls.Remove(StockExchangeLabels.StockCostName);
+                Controls.Remove(StockExchangeLabels.StocksCount);
+                Controls.Remove(StockExchangeLabels.BuyLabel);
+                Controls.Remove(StockExchangeLabels.SellLabel);
+                
+                Controls.Remove(Metflix.Label);
+                Controls.Remove(Metflix.StockCost);
+                Controls.Remove(Metflix.StocksCount);
+                Controls.Remove(Metflix.BuyButton);
+                Controls.Remove(Metflix.SellButton);
+                Controls.Remove(Metflix.Error);
+                
+                Controls.Remove(Zoom.Label);
+                Controls.Remove(Zoom.StockCost);
+                Controls.Remove(Zoom.StocksCount);
+                Controls.Remove(Zoom.BuyButton);
+                Controls.Remove(Zoom.SellButton);
+                
+                Controls.Add(PlayingFieldLabels.DescriptionCellText);
+                Controls.Add(StockExchangeButtons.OpenStockExchange);
+                PlayingFieldLabels.DescriptionCellText.Size = new Size(500, 150);
+                ChangeView();
+            };
+            Metflix.BuyButton.Click += (sender, args) => {
+                var asset = Stock.GetStock("Metflix");
+                if (asset.Cost < GameModel.Player.Savings) GameModel.Player.AddAsset(asset);
+                else Controls.Add(Metflix.Error);
+
+                UpdateMenuInfo();
+            };
+            Metflix.SellButton.Click += (sender, args) => {
+                var asset = Stock.GetStock("Metflix");
+                GameModel.Player.RemoveAsset(asset);
+                UpdateMenuInfo();
+            };
+            Zoom.BuyButton.Click += (sender, args) => {
+                var asset = Stock.GetStock("Zoom");
+                if (asset.Cost < GameModel.Player.Savings) GameModel.Player.AddAsset(asset);
+                else Controls.Add(Metflix.Error);
+
+                UpdateMenuInfo();
+            };
+            Zoom.SellButton.Click += (sender, args) => {
+                var asset = Stock.GetStock("Zoom");
+                GameModel.Player.RemoveAsset(asset);
+                UpdateMenuInfo();
             };
         }
 

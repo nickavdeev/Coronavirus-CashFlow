@@ -14,8 +14,8 @@ namespace CoronavirusCashFlow.Tests
             var work = Work.GetWork("Программист");
             Assert.AreEqual("Работа: Программист", work.Title);
             
-            var stock = Stock.GetStock("Netflix");
-            Assert.AreEqual("Акции Netflix", stock.Title);
+            var stock = Stock.GetStock("Metflix");
+            Assert.AreEqual("Metflix", stock.Title);
         }
         
         [Test]
@@ -31,7 +31,7 @@ namespace CoronavirusCashFlow.Tests
             Assert.AreEqual("Своя квартира", socialNeed.Title);
             
             var car = Car.GetCar("Volkswagen Polo");
-            Assert.AreEqual("Автомобиль: Volkswagen Polo", car.Title);
+            Assert.AreEqual("Volkswagen Polo", car.Title);
         }
         
         [Test]

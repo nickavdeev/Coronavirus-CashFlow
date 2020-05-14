@@ -14,7 +14,7 @@ namespace CoronavirusCashFlow.Model.Assets
         private static readonly Dictionary<string, Asset> Works = new Dictionary<string, Asset>
         {
             // Варианты работы
-            {"Программист", new Work("Программист", new Random().Next(20, 30) * 1000, 120)},
+            {"Программист", new Work("Программист", new Random().Next(350, 450) * 1000, 120)},
             {"Журналист", new Work("Журналист", new Random().Next(20, 30) * 1000, 100)},
         };
     }

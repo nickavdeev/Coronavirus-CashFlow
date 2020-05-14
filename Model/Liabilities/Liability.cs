@@ -2,7 +2,7 @@ namespace CoronavirusCashFlow.Model.Liabilities
 {
     public abstract class Liability
     {
-        public string Title;
+        public readonly string Title;
         public readonly double Cost;
         public readonly double Expense;
         public readonly int Hours;

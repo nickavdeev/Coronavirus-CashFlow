@@ -2,6 +2,9 @@ namespace CoronavirusCashFlow.Model.Enums
 {
     public enum ColorType
     {
-        DarkGreen
+        White,
+        LightGreen,
+        MediumGreen,
+        DarkGreen,
     }
 }
