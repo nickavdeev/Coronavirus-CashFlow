@@ -15,15 +15,27 @@ namespace CoronavirusCashFlow.Controller.PlayingFiled
         public static readonly Button OkButtonNewsGoodReport = GetGameButton("Следующий шаг");
         public static readonly Button OkButtonNewsBadReport = GetGameButton("Следующий шаг");
         
-        public static readonly Button NextMoveButton = GetGameButton("Следующий шаг");
-        public static readonly Button BuyDreamButton = GetGameButton("Купить!", 1);
-        public static readonly Button GetDebtButton = GetGameButton("Взять кредит", 1);
+        public static readonly Button OkButtonNewsGoodRandex = GetGameButton("Следующий шаг");
+        public static readonly Button OkButtonNewsBadGazneft = GetGameButton("Следующий шаг");
+        public static readonly Button OkButtonNewsGoodZuum = GetGameButton("Следующий шаг");
+        public static readonly Button OkButtonNewsBadGilead = GetGameButton("Следующий шаг");
         
+        public static readonly Button NextMoveButton = GetGameButton("Следующий шаг");
+        
+        public static readonly Button BuyDreamButton = GetGameButton("Купить!", 2);
+        public static readonly Button GetDebtButton = GetGameButton("Взять кредит", 1);
         public static readonly Button AcceptDebtButton = GetGameButton("Подтвердить", 1);
 
         public static readonly List<Button> PassButtonList = new List<Button> {OkButton};
+        public static readonly List<Button> PassButtonCreditList = new List<Button> {OkButton, GetDebtButton};
         public static readonly List<Button> NewsButtonGoodReportList = new List<Button> {OkButtonNewsGoodReport};
+        
         public static readonly List<Button> NewsButtonBadReportList = new List<Button> {OkButtonNewsBadReport};
+        
+        public static readonly List<Button> OkButtonNewsGoodRandexList = new List<Button> {OkButtonNewsGoodRandex};
+        public static readonly List<Button> OkButtonNewsBadGazneftList = new List<Button> {OkButtonNewsBadGazneft};
+        public static readonly List<Button> OkButtonNewsGoodZuumList = new List<Button> {OkButtonNewsGoodZuum};
+        public static readonly List<Button> OkButtonNewsBadGileadList = new List<Button> {OkButtonNewsBadGilead};
 
         private static Button GetGameButton(string text, int numberInList = 0)
         {
@@ -64,7 +76,7 @@ namespace CoronavirusCashFlow.Controller.PlayingFiled
 
             var dreamButtonsList = new List<Button>
             {
-                NextMoveButton, playerSavings >= dreamCost ? BuyDreamButton : GetDebtButton
+                NextMoveButton, BuyDreamButton, GetDebtButton
             };
             return dreamButtonsList;
         }

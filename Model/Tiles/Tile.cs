@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CoronavirusCashFlow.Model.Assets;
+using CoronavirusCashFlow.Model.Liabilities;
 
 namespace CoronavirusCashFlow.Model.Tiles
 {
@@ -25,6 +26,12 @@ namespace CoronavirusCashFlow.Model.Tiles
             Description = description;
             Buttons = buttons;
             StockList = stockList;
+        }
+        protected Tile(string description, List<Button> buttons, Liability liability)
+        {
+            Description = description;
+            Buttons = buttons;
+            GameModel.Player.AddLiability(liability);
         }
     }
 }

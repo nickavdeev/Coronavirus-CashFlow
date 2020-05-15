@@ -6,12 +6,12 @@ using CoronavirusCashFlow.View;
 
 namespace CoronavirusCashFlow.Controller.StockExchange
 {
-    public static class Metflix
+    public static class Randex
     {
-        private const int Y = 230;
+        private const int Y = 320;
         private const int Height = 30;
         private const FontStyle FontStyle = System.Drawing.FontStyle.Regular;
-        private static readonly Stock Stock = (Stock)Stock.GetStock("Metflix");
+        private static readonly Stock Stock = (Stock)Stock.GetStock("Рандекс");
 
         public static readonly Label CompanyName = new Label {
             Text = Stock.Title,

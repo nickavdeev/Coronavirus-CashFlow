@@ -90,7 +90,10 @@ namespace CoronavirusCashFlow.Model.Players
                 {
                     var asset = player.AssetsList[i];
                     
-                    if (uniqueAssets.Contains(asset)) continue;
+                    if (uniqueAssets.Contains(asset))
+                    {
+                        continue;
+                    } 
                     uniqueAssets.Add(asset);
                     
                     var assetCount = player.GetAssetCount(asset);
@@ -101,6 +104,7 @@ namespace CoronavirusCashFlow.Model.Players
                         i += assetCount;
                         continue;
                     }
+                    
                     if (Math.Abs(asset.Cost) < double.Epsilon) assetInfo += "";
                     else assetInfo += $"{asset.Title} ({asset.Cost})\n \n";
                     i++;
@@ -136,56 +140,63 @@ namespace CoronavirusCashFlow.Model.Players
             string GetAssetTimeInfo()
             {
                 var uniqueAssets = new List<Asset>();
-                var assetTimeInfo = "";
+                var assetInfo = "";
                 var i = 0;
                 while (i < player.AssetsList.Count)
                 {
                     var asset = player.AssetsList[i];
                     
-                    if (uniqueAssets.Contains(asset)) continue;
+                    if (uniqueAssets.Contains(asset))
+                    {
+                        continue;
+                    } 
                     uniqueAssets.Add(asset);
                     
                     var assetCount = player.GetAssetCount(asset);
-                    
-                    if (Math.Abs(asset.Hours) < double.Epsilon) assetTimeInfo += "";
-                    
-                    else if (assetCount > 1)
+
+                    if (assetCount > 1)
                     {
-                        assetTimeInfo += $"{asset.Title} — {assetCount} шт. ({asset.Hours * assetCount})\n \n";
+                        assetInfo += $"{asset.Title} — {assetCount} шт. ({asset.Hours * assetCount})\n \n";
                         i += assetCount;
                         continue;
                     }
-                    else assetTimeInfo += $"{asset.Title} ({asset.Hours})\n \n";
+                    
+                    if (Math.Abs(asset.Hours) < double.Epsilon) assetInfo += "";
+                    else assetInfo += $"{asset.Title} ({asset.Hours})\n \n";
                     i++;
                 }
-                return assetTimeInfo;
+                return assetInfo;
             }
             string GetLiabilityTimeInfo()
             {
-                var uniqueLiabilities = new List<Liability>();
-                var liabilityTimeInfo = "";
+                var uniqueAssets = new List<Liability>();
+                var assetInfo = "";
                 var i = 0;
                 while (i < player.LiabilitiesList.Count)
                 {
-                    var liability = player.LiabilitiesList[i];
+                    var asset = player.LiabilitiesList[i];
                     
-                    if (uniqueLiabilities.Contains(liability)) continue;
-                    uniqueLiabilities.Add(liability);
-                    
-                    var liabilityCount = player.GetLiabilityCount(liability);
-                    
-                    if (Math.Abs(liability.Hours) < double.Epsilon) liabilityTimeInfo += "";
-                    
-                    else if (liabilityCount > 1)
+                    if (uniqueAssets.Contains(asset))
                     {
-                        liabilityTimeInfo += $"{liability.Title} — {liabilityCount} шт. ({liability.Hours * liabilityCount})\n \n";
-                        i += liabilityCount;
+                        i++;
+                        continue;
+                    } 
+                    uniqueAssets.Add(asset);
+                    
+                    var assetCount = player.GetLiabilityCount(asset);
+
+                    if (assetCount > 1)
+                    {
+                        assetInfo += $"{asset.Title} — {assetCount} шт. ({asset.Hours * assetCount})\n \n";
+                        i += assetCount;
                         continue;
                     }
-                    else liabilityTimeInfo += $"{liability.Title} ({liability.Hours})\n \n";
+                    
+                    if (Math.Abs(asset.Hours) < double.Epsilon) assetInfo += "";
+                    else assetInfo += $"{asset.Title} ({asset.Hours})\n \n";
                     i++;
                 }
-                return liabilityTimeInfo;
+                return assetInfo;
             }
             string GetIncomeInfo()
             {
@@ -196,7 +207,10 @@ namespace CoronavirusCashFlow.Model.Players
                 {
                     var asset = player.AssetsList[i];
                     
-                    if (uniqueAssets.Contains(asset)) continue;
+                    if (uniqueAssets.Contains(asset))
+                    {
+                        continue;
+                    } 
                     uniqueAssets.Add(asset);
                     
                     var assetCount = player.GetAssetCount(asset);
@@ -207,7 +221,8 @@ namespace CoronavirusCashFlow.Model.Players
                         i += assetCount;
                         continue;
                     }
-                    if (Math.Abs(asset.Cost) < double.Epsilon) incomeInfo += "";
+                    
+                    if (Math.Abs(asset.Income) < double.Epsilon) incomeInfo += "";
                     else incomeInfo += $"{asset.Title} ({asset.Income})\n \n";
                     i++;
                 }
@@ -243,7 +258,12 @@ namespace CoronavirusCashFlow.Model.Players
             switch (type)
             {
                 case PlayerInfoType.MainInfo:
-                    return $"В игре: {player.Years} л. {player.Months} мес.\n \n" +
+                    string GetYears(int year)
+                    {
+                        if (year == 0) return "";
+                        return year % 10 < 5 ? year + " г. " : year + " л. ";
+                    }
+                    return $"В игре: {GetYears(player.Years)}{player.Months} мес.\n \n" +
                            $"Мечта: {player.Dream.Title}\n \n" + $"Сбережения: {player.Savings}\n \n" +
                            $"Денежный поток: {player.CashFlow()}\n \n" + $"Доходы: {player.Income()}\n \n" +
                            $"Расходы: {player.Expenses()}\n \n" + $"Активы: {player.Assets()}\n \n" +
@@ -271,7 +291,7 @@ namespace CoronavirusCashFlow.Model.Players
                 case PlayerName.Mike:
                     Name = "Михаил";
                     Dream = Car.GetCar("Porsche Cayman");
-                    Savings = 100000;
+                    Savings = 200000;
                     AssetsList = new List<Asset>
                     {
                         Work.GetWork("Программист"),
@@ -280,7 +300,9 @@ namespace CoronavirusCashFlow.Model.Players
                     {
                         SocialNeed.GetSocialNeed("Своя квартира"),
                         SocialNeed.GetSocialNeed("Связь и интернет"),
-                        Car.GetCar("Volkswagen Polo"), Car.TransportTax
+                        Car.GetCar("Volkswagen Polo"), Car.TransportTax,
+                        SocialNeed.GetSocialNeed("Продукты"),
+                        SocialNeed.GetSocialNeed("Транспорт"),
                     };
                     break;
                 default:

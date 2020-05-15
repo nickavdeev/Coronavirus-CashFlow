@@ -6,12 +6,12 @@ using CoronavirusCashFlow.View;
 
 namespace CoronavirusCashFlow.Controller.StockExchange
 {
-    public static class Metflix
+    public static class Zuum
     {
-        private const int Y = 230;
+        private const int Y = 260;
         private const int Height = 30;
         private const FontStyle FontStyle = System.Drawing.FontStyle.Regular;
-        private static readonly Stock Stock = (Stock)Stock.GetStock("Metflix");
+        private static readonly Stock Stock = (Stock)Stock.GetStock("Zuum");
 
         public static readonly Label CompanyName = new Label {
             Text = Stock.Title,
@@ -65,8 +65,8 @@ namespace CoronavirusCashFlow.Controller.StockExchange
         };
 
         public static readonly Button SellButton = new Button {
-            Name = Stock.Title,
             Text = "Продать",
+            Name = Stock.Title,
             Location = new Point(BuyButton.Right, Y),
             Size = new Size(115, Height),
             AutoSize = false,
@@ -81,15 +81,6 @@ namespace CoronavirusCashFlow.Controller.StockExchange
                 MouseDownBackColor = Colors.DarkGreen
             }
         };
-        public static readonly Label Error = new Label {
-            Text = "Недостаточно средств",
-            Location = new Point(700, 450), 
-            Size = new Size(200, Height), 
-            AutoSize = false,
-            Padding = new Padding(30, 5 ,0 ,0), 
-            Font = new Font("Arial", 10, FontStyle), 
-            BackColor = Color.Brown, 
-            ForeColor = Color.Gainsboro,
-        };
     }
+    
 }

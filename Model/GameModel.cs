@@ -6,6 +6,7 @@ using CoronavirusCashFlow.Model.Enums;
 using CoronavirusCashFlow.Model.Liabilities;
 using CoronavirusCashFlow.Model.Players;
 using CoronavirusCashFlow.Model.Tiles;
+using CoronavirusCashFlow.View;
 
 namespace CoronavirusCashFlow.Model
 {
@@ -33,7 +34,7 @@ namespace CoronavirusCashFlow.Model
                 Player.CashFlow() > Player.Expenses()
             };
             if (!goals.Contains(false))
-                Console.WriteLine($"Поздравляем! Вы достигли мечты: {Player.Name} купил {Player.Dream.Title}! 🎉");
+                GameForm.WinView();
         }
 
         private static void ChangeStocksCost()

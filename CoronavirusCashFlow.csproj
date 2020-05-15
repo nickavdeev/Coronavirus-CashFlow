@@ -67,12 +67,14 @@
     <Compile Include="Controller\Menu\PlayerInfoLabels.cs" />
     <Compile Include="Controller\PlayingFiled\PlayingFieldButtons.cs" />
     <Compile Include="Controller\PlayingFiled\PlayingFieldLabels.cs" />
-    <Compile Include="Controller\StockExchange\Companies.cs" />
+    <Compile Include="Controller\StockExchange\Gazneft.cs" />
+    <Compile Include="Controller\StockExchange\Gilead.cs" />
     <Compile Include="Controller\StockExchange\Metflix.cs" />
+    <Compile Include="Controller\StockExchange\Randex.cs" />
     <Compile Include="Controller\StockExchange\StockExchangeLabels.cs" />
     <Compile Include="Controller\StockExchange\StockExchangeButtons.cs" />
     <Compile Include="Controller\StockExchange\StockResult.cs" />
-    <Compile Include="Controller\StockExchange\Zoom.cs" />
+    <Compile Include="Controller\StockExchange\Zuum.cs" />
     <Compile Include="Model\Assets\Asset.cs" />
     <Compile Include="Model\Assets\Stock.cs" />
     <Compile Include="Model\Assets\Work.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Model\Players\Player.cs" />
     <Compile Include="Model\Tiles\Advice.cs" />
     <Compile Include="Model\Tiles\Dreams.cs" />
+    <Compile Include="Model\Tiles\FixedCosts.cs" />
     <Compile Include="Model\Tiles\LifeSituations.cs" />
     <Compile Include="Model\Tiles\News.cs" />
     <Compile Include="Model\Tiles\StockSituations.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Tests\PlayerTests.cs" />
     <Compile Include="View\Colors.cs" />
     <Compile Include="View\GameForm.cs" />
+    <Compile Include="View\Images.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configs\App.config" />

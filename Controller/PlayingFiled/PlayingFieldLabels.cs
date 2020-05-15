@@ -26,15 +26,15 @@ namespace CoronavirusCashFlow.Controller.PlayingFiled
             ForeColor = Color.Snow,
         };
         public static readonly Label DescriptionCellText = new Label {
-            Font = new Font("Arial", 12, FontStyle.Regular),
+            Font = new Font("", 14, FontStyle.Regular),
             Location = new Point(550, CellText.Bottom),
             Size = new Size(500, 150),
             AutoSize = false,
             MaximumSize = new Size(500, 0),
-            TextAlign = ContentAlignment.MiddleCenter,
+            TextAlign = ContentAlignment.MiddleLeft,
             BackColor = Colors.LightGreen,
             ForeColor = Color.Snow,
-            Padding = new Padding(20, 20, 40, 20),
+            Padding = new Padding(30, 20, 50, 20),
         };
     }
 }
